@@ -1,0 +1,19 @@
+<div class="container">
+  <h1 class="mt-5">All Entries</h1>
+  <div>
+    <ul class="list-group">
+        <% @entries.each do |entry| %>
+          <li class="list-group-item rounded-top">
+           <div class="mt-2">
+             Name: <%= entry.name %>
+           </div>
+           <div class="mt-1 mb-5">
+             Link: <%= entry.link %>
+           </div>
+           <%= button_to "Delete", entry, method: :delete, class: "btn btn-danger mb-4"%>
+          </li>
+          <br>
+        <% end %>
+    </ul>
+  </div>
+</div>
