@@ -1,5 +1,5 @@
 <div class='container'>
-  <h1 class='mt-5'>New Entry</h1>
+  <h1 class='mt-5'>Appraisal Entry</h1>
 
   <%= form_with(model: [@appraisal, @entry], local: true) do |form| %>
     <% @categories.each do |category| %>
@@ -26,3 +26,5 @@
   <div>
     <%= link_to "Back to home", home_index_path %>
   </div>
+  <br><br>
+</div>
