@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Ruby Journal App" %></title>
+    <title><%= content_for(:title) || "SoliRise" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -18,7 +18,20 @@
   </head>
 
   <body>
-    <%= render '/shared/navbar' %>
+    <%= render 'shared/navbar' unless @disable_nav %>
+    <div class="container mt-3">
+      <% if notice %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

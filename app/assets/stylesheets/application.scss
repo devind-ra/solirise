@@ -14,3 +14,19 @@
  *= require_tree .
  *= require_self
  */
+ .alert {
+    animation: fadeOut 5s forwards; /* Fades out after 5 seconds */
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      display: none;
+    }
+  }
