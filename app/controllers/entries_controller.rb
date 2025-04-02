@@ -11,13 +11,14 @@ class EntriesController < ApplicationController
     end
 
     def create
-        @entry = @appraisal.entries.build(entry_params)
-        if @entry.save
-          redirect_to entries_path, notice: "Entry submitted successfully!"
-        else
-          render :new
-        end
+      @entry = @appraisal.entries.build(entry_params)
+
+      if @entry.save
+        redirect_to entries_path, notice: "Entry submitted successfully!"
+      else
+        render :new
       end
+    end
 
     def destroy
         Entry.find(params[:id]).destroy
