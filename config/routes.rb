@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "admin_home/index"
   get "home/index", as: :home
   root "landing#index"
   devise_for :users, controllers: {
