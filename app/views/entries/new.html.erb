@@ -1,23 +1,30 @@
 <div class='container'>
-  <h1 class='mt-5'>New Entry</h1>
+  <h1 class='mt-5'>Appraisal Entry</h1>
 
-  <%= form_with(model: @entry, local: true) do |form| %>
-    <div class="mb-3">
-      <%= form.label :name, class: "form-label" %>
-      <%= form.text_field :name, class: "form-control", id: "inputName" %>
-    </div>
-    <div class="mb-3">
-      <%= form.label :link, class: "form-label" %>
-      <%= form.text_field :link, class: "form-control", id: "inputLink" %>
-    </div>
+  <%= form_with(model: [@appraisal, @entry], local: true) do |form| %>
+    <% @categories.each do |category| %>
+      <h3><%= category.name %></h3>
+
+      <ul>
+        <% category.questions.each do |question| %>
+          <li><%= question.content %></li>
+        <% end %>
+      </ul>
+
+      <div class="mb-3">
+        <%= form.label "category_#{category.id}", "Yes/No/Partial", class: "form-label" %>
+        <%= form.text_area "answers[#{category.id}]", class: "form-control", id: "category_#{category.id}", rows: 4, placeholder: "Add your evidence here" %>
+      </div>
+    <% end %>
+
     <div>
       <%= form.submit "Submit", class: "btn btn-primary" %>
     </div>
   <% end %>
 
   <br>
-
   <div>
-    <%= link_to "Back to home", root_path %>
+    <%= link_to "Back to home", home_path %>
   </div>
+  <br><br>
 </div>
