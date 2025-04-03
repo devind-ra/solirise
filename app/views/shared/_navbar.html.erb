@@ -7,9 +7,9 @@
   <div class="d-flex me-3">
     <% if current_user.admin? %>
       <% if request.path == admin_home_index_path %>
-          <%= link_to "Switch to User View", home_path, class: "mt-2 me-2 mb-2 btn btn-primary" %>
+          <%= link_to "Switch to User View", home_path, class: "mt-2 me-2 mb-2 ms-5 btn btn-outline-primary" %>
       <% else %>
-          <%= link_to "Switch to Admin View", admin_home_index_path, class: "mt-2 me-2 mb-2 ms-5 btn btn-primary" %>
+          <%= link_to "Switch to Admin View", admin_home_index_path, class: "mt-2 me-2 mb-2 ms-5 btn btn-outline-primary" %>
       <% end %>
     <% end %>
     <% if user_signed_in? %> 

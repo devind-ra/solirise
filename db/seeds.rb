@@ -1,3 +1,11 @@
+
+Question.destroy_all
+
+# Now, delete all categories
+Category.destroy_all
+
+ActiveRecord::Base.connection.execute("ALTER SEQUENCE categories_id_seq RESTART WITH 1")
+ActiveRecord::Base.connection.execute("ALTER SEQUENCE questions_id_seq RESTART WITH 1")
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -67,7 +75,7 @@ grade1_categories_with_questions = {
 
 grade1_categories_with_questions.each do |page, categories|
   categories.each do |category_name, questions|
-    category = Category.find_or_create_by!(name: category_name)
+    category = Category.find_or_create_by!(name: category_name, page: page)
 
     questions.each do |content|
       category.questions.find_or_create_by!(content: content)
