@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get "admin_home", to: "admin_home#index", as: :admin_home
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :appraisals, only: [ :index, :destroy ] do
-    resources :entries, only: [ :new, :create, :destroy, :update, :edit ]
+    resources :entries, only: [ :new, :create, :destroy, :update, :edit ] do
+      get 'view', on: :member
+    end
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
