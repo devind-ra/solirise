@@ -13,7 +13,7 @@
 
       <div class="mb-3">
         <%= form.label "category_#{category.id}", "Yes/No/Partial", class: "form-label" %>
-        <%= form.text_area "answers[#{category.id}]", class: "form-control", id: "category_#{category.id}", rows: 4, placeholder: "Add your evidence here" %>
+        <%= form.text_area nil, name: "entry[answers][#{category.id}]", class: "form-control", id: "answers_#{category.id}", rows: 4, placeholder: "Add your evidence here" %>
       </div>
     <% end %>
 

@@ -1,3 +1,17 @@
 <div class="container">
     <h1>Home</h1>
+    <br>
+    <h2>All Appraisals</h2>
+    <br>
+    <% @appraisals.each do |appraisal| %>
+      <div class="appraisal">
+        <h3><%= appraisal.created_at.strftime("%B %d, %Y at %I:%M %p") %></h3>
+        <% last_entry = appraisal.entries.last %>
+        <% if last_entry %>
+          <%= link_to 'Edit Last Entry', edit_appraisal_entry_path(appraisal, last_entry) %>
+        <% else %>
+          <p>No entries available for this appraisal.</p>
+        <% end %>
+      </div>
+    <% end %>
 </div>
