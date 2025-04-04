@@ -2,21 +2,28 @@
   <h1 class='mt-5'>Appraisal Entry</h1>
 
   <%= form_with(model: [@appraisal, @entry], local: true) do |form| %>
-    <% @categories.each do |category| %>
-      <h3><%= category.name %></h3>
+    <% grouped_categories = @categories.group_by(&:page) %>
+    <% grouped_categories.each do |page, categories| %>
+      <h2>Section <%= page %></h2>
 
-      <ul>
-        <% category.questions.each do |question| %>
-          <li><%= question.content %></li>
-        <% end %>
-      </ul>
+      <% categories.each do |category| %>
+        <h3><%= category.name %></h3>
 
-      <div class="mb-3">
-        <%= form.label "category_#{category.id}", "Yes/No/Partial", class: "form-label" %>
-        <%= form.text_area nil, name: "entry[answers][#{category.id}]", class: "form-control", id: "answers_#{category.id}", rows: 4, placeholder: "Add your evidence here" %>
-      </div>
+        <ul>
+          <% category.questions.each do |question| %>
+            <li><%= question.content %></li>
+          <% end %>
+        </ul>
+
+        <div class="mb-3">
+          <% case category.page %>
+          <% when 1 %>
+            <p><strong>Yes/No/Partial</strong></p>
+          <% end %>
+          <%= form.text_area nil, name: "entry[answers][#{category.id}]", class: "form-control", id: "answers_#{category.id}", rows: 4, placeholder: "Add your evidence here" %>
+        </div>
+      <% end %>
     <% end %>
-
     <div>
       <%= form.submit "Submit", class: "btn btn-primary" %>
     </div>
