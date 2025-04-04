@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
   before_action :set_appraisal, only: [ :new, :create, :edit, :update ]
-  before_action :set_entry, only: [:edit, :update]
+  before_action :set_entry, only: [ :edit, :update ]
 
   # def index
   #     @entries = Entry.all
