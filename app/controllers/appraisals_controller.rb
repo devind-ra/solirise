@@ -1,6 +1,12 @@
 class AppraisalsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_appraisal, only: [ :show ]
+    before_action :set_appraisal, only: [ :show, :destroy ]
+
+    def destroy
+        @appraisal.destroy
+
+        redirect_to admin_home_index_path, notice: "Appraisal deleted successfully."
+    end
 
     def show
         if @appraisal.user != current_user

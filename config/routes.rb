@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     passwords: "users/passwords"
   }
+  get 'admin_home', to: 'admin_home#index', as: :admin_home
+  resources :appraisals, only: [:destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :appraisals do
     resources :entries, only: [ :new, :create, :destroy, :update, :edit ]
