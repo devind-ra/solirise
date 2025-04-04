@@ -8,9 +8,8 @@ Rails.application.routes.draw do
     passwords: "users/passwords"
   }
   get 'admin_home', to: 'admin_home#index', as: :admin_home
-  resources :appraisals, only: [:destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resources :appraisals do
+  resources :appraisals, only: [:index, :destroy] do
     resources :entries, only: [ :new, :create, :destroy, :update, :edit ]
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

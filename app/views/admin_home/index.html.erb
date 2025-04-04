@@ -13,7 +13,7 @@
           <tr>
             <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
             <td>
-              <%= link_to 'Delete', appraisal_path(appraisal), method: :delete, class: 'btn btn-danger' %>
+              <%= button_to 'Delete', appraisal_path(appraisal), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
             </td>
           </tr>
         <% end %>
