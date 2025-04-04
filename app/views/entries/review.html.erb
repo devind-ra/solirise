@@ -1,0 +1,29 @@
+<div class='container'>
+  <h1 class='mt-5'>Review Your Answers</h1>
+
+  <% @categories.each do |category| %>
+    <h3><%= category.name %></h3>
+    <ul>
+      <% category.questions.each do |question| %>
+        <li><%= question.content %></li>
+      <% end %>
+    </ul>
+
+    <div class="mb-3">
+      <strong>Your Answer:</strong>
+      <%= @answers[category.id.to_s] || "No answer provided" %>
+    </div>
+  <% end %>
+  <div>
+      <%= link_to "Back to Form", step_appraisal_entry_path(@appraisal, @entry, steps.last), class: "btn btn-secondary" %>
+      <%= form_with(url: submit_review_appraisal_entries_path(@appraisal), method: :post, local: true) do |form| %>
+        <%= form.hidden_field :submit_review, value: "true" %>
+        <%= form.submit "Submit Review", class: "btn btn-success" %>
+      <% end %>
+  </div>
+
+  <br>
+  <div>
+    <%= link_to "Back to home", home_path %>
+  </div>
+</div>

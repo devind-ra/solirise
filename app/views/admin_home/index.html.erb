@@ -1,4 +1,25 @@
 <div class="container">
     <h1>Welcome to the Admin Dashboard</h1>
-
+    <% if @appraisals.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @appraisals.each do |appraisal| %>
+          <tr>
+            <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+            <td>
+              <%= button_to 'Delete', appraisal_path(appraisal), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No appraisals found.</p>
+  <% end %>
 </div>

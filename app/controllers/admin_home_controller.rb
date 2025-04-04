@@ -3,6 +3,7 @@ class AdminHomeController < ApplicationController
   before_action :check_admin
 
   def index
+    @appraisals = Appraisal.all
   end
 
   private
