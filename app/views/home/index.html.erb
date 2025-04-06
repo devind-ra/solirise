@@ -1,6 +1,24 @@
 <div class="container">
   <h1>Home</h1>
   <br>
+  <h2>Pending Appraisals</h2>
+  <br>
+  <% if @pending_appraisals.any? %>
+    <ul class="list-group mb-4">
+      <% @pending_appraisals.each do |appraisal| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong><%= appraisal.title %></strong><br>
+          </div>
+          <%= link_to "Start Entry", new_appraisal_entry_path(appraisal), class: "btn btn-success" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No pending appraisals 🎉</p>
+    <br>
+  <% end %>
+
   <h2>All Appraisals</h2>
   <br>
   
