@@ -3,7 +3,7 @@ class AppraisalsController < ApplicationController
     before_action :check_admin
     before_action :set_appraisal, only: [ :destroy ]
 
-    def new 
+    def new
         @appraisal = Appraisal.new
     end
 
