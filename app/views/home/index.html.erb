@@ -9,17 +9,25 @@
       <thead>
         <tr>
           <th>Created At</th>
-          <th>Actions</th>
+          <th>Edit Action</th>
+          <th>View Action</th>
         </tr>
       </thead>
       <tbody>
         <% @appraisals.each do |appraisal| %>
           <tr>
+            <% last_entry = appraisal.entries.last %>
             <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
             <td>
-              <% last_entry = appraisal.entries.last %>
               <% if last_entry %>
                 <%= link_to 'Edit Last Entry', edit_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-primary' %>
+              <% else %>
+                <p>No entries available for this appraisal.</p>
+              <% end %>
+            </td>
+            <td>
+              <% if last_entry %>
+                <%= link_to 'View Last Entry', view_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-secondary' %>
               <% else %>
                 <p>No entries available for this appraisal.</p>
               <% end %>

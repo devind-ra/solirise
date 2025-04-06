@@ -5,15 +5,24 @@
       <thead>
         <tr>
           <th>Created At</th>
-          <th>Actions</th>
+          <th>Delete Action</th>
+          <th>View Action</th>
         </tr>
       </thead>
       <tbody>
         <% @appraisals.each do |appraisal| %>
           <tr>
+            <% last_entry = appraisal.entries.last %>
             <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
             <td>
               <%= button_to 'Delete', appraisal_path(appraisal), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+            </td>
+            <td>
+              <% if last_entry %>
+                <%= link_to 'View Last Entry', view_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-secondary' %>
+              <% else %>
+                <p>No entries available for this appraisal.</p>
+              <% end %>
             </td>
           </tr>
         <% end %>
