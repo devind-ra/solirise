@@ -73,6 +73,34 @@
           null
         ]
       },
+      "/Users/devin.rathod/Documents/Code/ruby-grad-training/ruby-journal-app/app/models/entry.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/devin.rathod/Documents/Code/ruby-grad-training/ruby-journal-app/app/models/appraisal.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
       "/Users/devin.rathod/Documents/Code/ruby-grad-training/ruby-journal-app/app/channels/application_cable/channel.rb": {
         "lines": [
           0,
@@ -185,6 +213,18 @@
           0,
           0,
           null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -514,38 +554,8 @@
         ],
         "branches": {}
       },
-      "/Users/devin.rathod/Documents/Code/ruby-grad-training/ruby-journal-app/app/models/appraisal.rb": {
-        "lines": [
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0
-        ],
-        "branches": {}
-      },
       "/Users/devin.rathod/Documents/Code/ruby-grad-training/ruby-journal-app/app/models/category.rb": {
         "lines": [
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/Users/devin.rathod/Documents/Code/ruby-grad-training/ruby-journal-app/app/models/entry.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          null,
           0,
           0,
           0,
@@ -557,7 +567,6 @@
         "lines": [
           0,
           0,
-          0,
           null,
           0,
           0
@@ -565,6 +574,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1743775044
+    "timestamp": 1743967781
   }
 }
