@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  before_action :set_appraisal, only: [ :new, :create, :edit, :update ]
+  before_action :set_appraisal, only: [ :new, :create, :edit, :update, :view ]
   before_action :set_entry, only: [ :edit, :update ]
 
   # def index
@@ -8,7 +8,7 @@ class EntriesController < ApplicationController
 
   def new
       @entry = Entry.new
-      @categories = Category.includes(:questions) # Loads all categories with their questions
+      @categories = Category.includes(:questions)
   end
 
   def create
@@ -18,6 +18,18 @@ class EntriesController < ApplicationController
       redirect_to home_path, notice: "Entry submitted successfully!"
     else
       render :new
+    end
+  end
+
+  def view
+    @categories = Category.includes(:questions)
+    if params[:appraisal_id]
+      @appraisal = Appraisal.find(params[:appraisal_id])
+      @entry = @appraisal.entries.last
+    else
+      @entry = Entry.find(params[:id])
+      @appraisal = @entry.appraisal
+      @categories = Category.includes(:questions)
     end
   end
 
@@ -41,7 +53,7 @@ class EntriesController < ApplicationController
   private
 
   def set_appraisal
-    @appraisal = Appraisal.find(params[:appraisal_id])
+    @appraisal = Appraisal.find(params[:appraisal_id] || params[:id])
   end
 
   def set_entry

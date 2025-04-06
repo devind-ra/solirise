@@ -1,0 +1,48 @@
+<div class='container'>
+  <div>
+    <% if request.referer&.include?(admin_home_index_path) %>
+        <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-primary" %>
+    <% else %>
+        <%= link_to "Back to Home", home_path, class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+  <h1 class='mt-5'>Appraisal Entry</h1>
+  <% if @appraisal %>
+    <% grouped_categories = @categories.group_by(&:page) %>
+    <% grouped_categories.each do |page, categories| %>
+      <h2>Section <%= page %></h2>
+
+      <% categories.each do |category| %>
+        <h3><%= category.name %></h3>
+
+        <ul>
+          <% category.questions.each do |question| %>
+            <li><%= question.content %></li>
+          <% end %>
+        </ul>
+
+        <div class="mb-3">
+          <%# Display specific content based on the page number %>
+          <% case category.page %>
+          <% when 1 %>
+            <p><strong>Yes/No/Partial</strong></p>
+          <% end %>
+
+          <textarea class="form-control" id="answers_<%= category.id %>" rows="4" disabled><%= @entry.answers&.[](category.id.to_s) || "No answer provided" %></textarea>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p>No entries found for this appraisal.</p>
+  <% end %>
+
+  <br>
+  <div>
+    <% if request.referer&.include?(admin_home_index_path) %>
+      <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-primary" %>
+    <% else %>
+      <%= link_to "Back to Home", home_path, class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+  <br><br>
+</div>
