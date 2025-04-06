@@ -1,5 +1,8 @@
 <div class="container">
     <h1>Welcome to the Admin Dashboard</h1>
+    <br>
+    <%= link_to "Create Appraisal", new_appraisal_path, class: "btn btn-primary" %>
+    <br><br>
     <% if @appraisals.any? %>
     <table class="table">
       <thead>
