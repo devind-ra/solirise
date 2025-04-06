@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   }
   get "admin_home", to: "admin_home#index", as: :admin_home
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resources :appraisals, only: [ :index, :destroy ] do
+  resources :appraisals, only: [ :index, :new, :create, :destroy ] do
     resources :entries, only: [ :new, :create, :destroy, :update, :edit ] do
       get "view", on: :member
     end
