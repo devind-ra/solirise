@@ -17,16 +17,15 @@
         </tr>
         </thead>
         <tbody>
+        <% most_recent_appraisal = @appraisals.max_by(&:created_at) %>
         <% @appraisals.each do |appraisal| %>
             <tr>
             <td><%= appraisal.title %></td>
             <% last_entry = appraisal.entries.last %>
             <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
             <td>
-                <% if last_entry %>
-                <%= link_to 'Edit Entry', edit_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-primary' %>
-                <% else %>
-                <p>No entry available for this appraisal.</p>
+                <% if appraisal == most_recent_appraisal %>
+                    <%= link_to 'Edit Entry', edit_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-primary' %>
                 <% end %>
             </td>
             <td>
