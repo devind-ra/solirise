@@ -16,7 +16,7 @@ class EntriesController < ApplicationController
 
     if @entry.answers.values.any?(&:blank?)
       @entry.save(validate: false)
-  
+
       redirect_to home_path, notice: "Entry saved as draft. You can continue filling out the answers."
     else
       if @entry.save
