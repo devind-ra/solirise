@@ -1,0 +1,46 @@
+<div class="container">
+    <div>
+        <%= link_to "Back to home", home_path, class: "btn btn-secondary" %>
+    </div>
+    <br>
+    <h2>All Appraisals</h2>
+    <br>
+
+    <% if @appraisals&.any? %>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Appraisal Title</th>
+            <th>Updated At</th>
+            <th>Edit Action</th>
+            <th>View Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @appraisals.each do |appraisal| %>
+            <tr>
+            <td><%= appraisal.title %></td>
+            <% last_entry = appraisal.entries.last %>
+            <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+            <td>
+                <% if last_entry %>
+                <%= link_to 'Edit Entry', edit_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-primary' %>
+                <% else %>
+                <p>No entry available for this appraisal.</p>
+                <% end %>
+            </td>
+            <td>
+                <% if last_entry %>
+                <%= link_to 'View Entry', view_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-secondary' %>
+                <% else %>
+                <p>No entry available for this appraisal.</p>
+                <% end %>
+            </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+    <% else %>
+    <p>No appraisals found.</p>
+    <% end %>
+</div>

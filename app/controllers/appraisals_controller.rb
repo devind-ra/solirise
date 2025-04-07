@@ -11,17 +11,21 @@ class AppraisalsController < ApplicationController
         @appraisal = Appraisal.new(appraisal_params)
         @appraisal.user = User.find(params[:user_id]) if params[:user_id].present?
         if @appraisal.save
-            redirect_to admin_home_path, notice: "Appraisal created for #{@appraisal.user.first_name} #{@appraisal.user.last_name}."
+            redirect_to admin_home_index_path, notice: "Appraisal created for #{@appraisal.user.first_name} #{@appraisal.user.last_name}."
         else
             render :new, alert: "Failed to create appraisal."
         end
     end
 
+    def view
+        @appraisals = current_user.appraisals.includes(:entries).order(updated_at: :desc)
+    end
+
     def destroy
         if @appraisal.destroy
-            redirect_to admin_home_path, notice: "Appraisal successfully deleted."
+            redirect_to admin_home_index_path, notice: "Appraisal successfully deleted."
         else
-            redirect_to admin_home_path, alert: "Failed to delete appraisal."
+            redirect_to admin_home_index_path, alert: "Failed to delete appraisal."
         end
     end
 
