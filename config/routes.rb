@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :appraisals, only: [ :index, :new, :create, :destroy ] do
     resources :entries, only: [ :new, :create, :destroy, :update, :edit ] do
       get "view", on: :member
+      get "download", on: :member
     end
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

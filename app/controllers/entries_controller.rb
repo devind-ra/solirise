@@ -1,6 +1,9 @@
+require "prawn"
+include EntriesHelper
+
 class EntriesController < ApplicationController
-  before_action :set_appraisal, only: [ :new, :create, :edit, :update, :view ]
-  before_action :set_entry, only: [ :edit, :update ]
+  before_action :set_appraisal, only: [ :new, :create, :edit, :update, :view, :download ]
+  before_action :set_entry, only: [ :edit, :update, :view, :download ]
 
   # def index
   #     @entries = Entry.all
@@ -58,6 +61,20 @@ class EntriesController < ApplicationController
   def destroy
       Entry.find(params[:id]).destroy
       redirect_to home_path
+  end
+
+  def download
+    @entry = Entry.find(params[:id])
+    @appraisal = @entry.appraisal
+    @categories = Category.includes(:questions)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = generate_pdf(@entry, @appraisal, @categories)
+        send_data pdf.render, filename: "Appraisal_Entry_#{@entry.id}.pdf", type: "application/pdf", disposition: "attachment"
+      end
+    end
   end
 
   private
