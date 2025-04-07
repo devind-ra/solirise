@@ -14,10 +14,16 @@ class EntriesController < ApplicationController
   def create
     @entry = @appraisal.entries.build(entry_params)
 
-    if @entry.save
-      redirect_to home_path, notice: "Entry submitted successfully!"
+    if @entry.answers.values.any?(&:blank?)
+      @entry.save(validate: false)
+  
+      redirect_to home_path, notice: "Entry saved as draft. You can continue filling out the answers."
     else
-      render :new
+      if @entry.save
+        redirect_to home_path, notice: "Entry submitted successfully!"
+      else
+        render :new
+      end
     end
   end
 
@@ -39,7 +45,11 @@ class EntriesController < ApplicationController
 
   def update
     if @entry.update(entry_params)
-      redirect_to home_path, notice: "Entry updated successfully!"
+      if @entry.answers.values.any?(&:blank?)
+        redirect_to home_path, notice: "Entry saved as draft. You can continue later."
+      else
+        redirect_to home_path, notice: "Entry submitted successfully!"
+      end
     else
       render :edit
     end

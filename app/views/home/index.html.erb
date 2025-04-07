@@ -10,7 +10,12 @@
           <div>
             <strong><%= appraisal.title %></strong><br>
           </div>
-          <%= link_to "Start Entry", new_appraisal_entry_path(appraisal), class: "btn btn-success" %>
+          <% last_entry = appraisal.entries.last %>
+          <% if last_entry && last_entry.answers.values.any?(&:blank?) %>
+            <%= link_to "Continue Entry", edit_appraisal_entry_path(appraisal, last_entry), class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to "Start Entry", new_appraisal_entry_path(appraisal), class: "btn btn-success" %>
+          <% end %>
         </li>
       <% end %>
     </ul>
