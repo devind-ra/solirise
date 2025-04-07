@@ -2,26 +2,30 @@
   <div class="container-fluid">
     <div class="d-flex align-items-center">
       <a class="navbar-brand me-3" href="<%= soli_brand_link_path %>">SoliRise</a>
-      <%= link_to "All Appraisals", view_all_appraisals_path, class: "btn btn-outline-success btn-sm" %>
-      <%= link_to "My Goals", goals_path, class: "mr-2 btn btn-outline-info btn-sm" %>
+      <%= link_to "All Appraisals", view_all_appraisals_path, class: "btn btn-info btn-me me-2" %>
+      <%= link_to "My Goals", goals_path, class: "mr-2 btn btn-info btn-me" %>
     </div>
   </div>
   <div class="d-flex me-3">
     <% if current_user.admin? %>
       <% if session[:admin_mode] %>
-        <%= button_to "Switch to User View", switch_to_user_path, method: :post, class: "mt-2 me-2 mb-2 ms-5 btn btn-outline-primary" %>
+        <%= button_to switch_to_user_path, method: :post, class: "mt-2 me-2 mb-2 ms-5 btn btn-secondary" do %>
+          <i class="bi bi-arrow-left-right"></i> User
+        <% end %>
       <% else %>
-        <%= button_to "Switch to Admin View", switch_to_admin_path, method: :post, class: "mt-2 me-2 mb-2 ms-5 btn btn-outline-primary" %>
+        <%= button_to switch_to_admin_path, method: :post, class: "mt-2 me-2 mb-2 ms-5 btn btn-secondary" do %>
+          <i class="bi bi-arrow-left-right"></i> Admin
+        <% end %>
       <% end %>
     <% end %>
     <div class="nav-link ms-2 mt-3">
-      <%= link_to edit_user_registration_path do %>
+      <%= link_to edit_user_registration_path, aria: { label: "Edit Profile" }  do %>
         <i class="bi bi-gear-fill fs-2 mb-2"></i>
       <% end %>
     </div>
     <% if user_signed_in? %> 
       <div class="nav-link ms-2 mt-2">
-        <%= button_to destroy_user_session_path, method: :delete, class: "nav-link ms-2 mt-2" do %>
+        <%= button_to destroy_user_session_path, method: :delete, class: "nav-link ms-2 mt-2", aria: { label: "Sign out" }  do %>
           <i class="bi bi-box-arrow-left fs-2 mb-2"></i>
           <% end %>
         <% end %>
