@@ -18,7 +18,7 @@ class AppraisalsController < ApplicationController
     end
 
     def view
-        @appraisals = current_user.appraisals.includes(:entries).order(updated_at: :desc) 
+        @appraisals = current_user.appraisals.includes(:entries).order(updated_at: :desc)
     end
 
     def destroy
