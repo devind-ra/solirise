@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<%= home_path %>">
-      SoliRise
-    </a>
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand me-3" href="<%= home_path %>">SoliRise</a>
+      <%= link_to "All Appraisals", view_all_appraisals_path, class: "btn btn-outline-success btn-sm" %>
+    </div>
   </div>
   <div class="d-flex me-3">
     <% if current_user.admin? %>

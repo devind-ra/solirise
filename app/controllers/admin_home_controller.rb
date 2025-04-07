@@ -3,7 +3,7 @@ class AdminHomeController < ApplicationController
   before_action :check_admin
 
   def index
-    @appraisals = Appraisal.all
+    @appraisals = Appraisal.all.order(updated_at: :desc)
   end
 
   private
