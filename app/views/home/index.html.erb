@@ -23,4 +23,36 @@
     <p>No pending appraisals 🎉</p>
     <br>
   <% end %>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">All Appraisals</h5>
+          <p class="card-text">View and manage all your appraisals here.</p>
+          <%= link_to 'Go to Appraisals', view_all_appraisals_path, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Goals</h5>
+          <p class="card-text">Manage your goals and track your progress.</p>
+          <%= link_to 'Go to Goals', goals_path, class: 'btn btn-success' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Edit Profile</h5>
+          <p class="card-text">Update your profile details here.</p>
+          <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-info' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
