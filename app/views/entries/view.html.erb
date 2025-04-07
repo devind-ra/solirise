@@ -6,6 +6,10 @@
         <%= link_to "Back to Home", home_path, class: "btn btn-secondary" %>
     <% end %>
   </div>
+  <br>
+  <div>
+    <%= link_to "Download as PDF", download_appraisal_entry_path(@appraisal, @entry, format: :pdf), class: "btn btn-primary", target: "_blank" %>
+  </div>
   <h1 class='mt-5'>Appraisal Entry</h1>
   <% if @appraisal %>
     <% grouped_categories = @categories.group_by(&:page) %>
