@@ -3,6 +3,8 @@ class HomeController < ApplicationController
 
   def index
     @appraisals = current_user.appraisals.includes(:entries)
-    @pending_appraisals = @appraisals.select { |a| a.entries.empty? }
+    @pending_appraisals = @appraisals.select do |appraisal|
+      appraisal.entries.empty? || appraisal.entries.any? { |entry| entry.answers.values.any?(&:blank?) }
+    end
   end
 end
