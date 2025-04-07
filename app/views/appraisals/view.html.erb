@@ -24,8 +24,10 @@
             <% last_entry = appraisal.entries.last %>
             <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
             <td>
-                <% if appraisal == most_recent_appraisal %>
+                <% if appraisal == most_recent_appraisal && last_entry %>
                     <%= link_to 'Edit Entry', edit_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-primary' %>
+                <% elsif appraisal == most_recent_appraisal %>
+                    <p>No entry available to edit.</p>
                 <% end %>
             </td>
             <td>
