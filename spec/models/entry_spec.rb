@@ -20,14 +20,14 @@ RSpec.describe Entry, type: :model do
     describe 'callbacks' do
         let(:user) { User.create!(email: 'test@example.com', password: 'password', first_name: 'Test', last_name: 'User') }
         let(:appraisal) { Appraisal.create!(title: 'Test Appraisal', user: user) }
-    
+
         context 'after_create' do
           it 'updates the appraisal timestamp' do
             entry = Entry.create!(appraisal: appraisal)
             expect(appraisal.reload.updated_at).to be_within(1.second).of(entry.created_at)
           end
         end
-    
+
         context 'after_update' do
           it 'updates the appraisal timestamp' do
             entry = Entry.create!(appraisal: appraisal)

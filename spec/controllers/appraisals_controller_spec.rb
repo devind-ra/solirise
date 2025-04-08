@@ -58,7 +58,7 @@ RSpec.describe AppraisalsController, type: :controller do
         appraisal2 = Appraisal.create!(title: 'Appraisal 2', user: admin_user)
 
         get :view
-        expect(assigns(:appraisals)).to match_array([appraisal1, appraisal2])
+        expect(assigns(:appraisals)).to match_array([ appraisal1, appraisal2 ])
         end
     end
 

@@ -5,7 +5,7 @@ RSpec.describe EntriesController, type: :controller do
     let(:admin) { User.create!(email: 'admin@example.com', password: 'password', first_name: 'Admin', last_name: 'User', role: 'admin') }
     let(:appraisal) { Appraisal.create!(title: 'Sample Appraisal', user: user) }
     let(:entry) { Entry.create!(appraisal: appraisal, answers: { '1' => 'Answer 1', '2' => '' }) }
-  
+
     before do
       sign_in user
     end
@@ -54,7 +54,7 @@ RSpec.describe EntriesController, type: :controller do
                 expect(assigns(:categories)).to eq(Category.includes(:questions))
             end
         end
-  
+
         context 'when appraisal_id is not provided' do
             it 'assigns the entry, appraisal, and categories' do
                 get :view, params: { appraisal_id: appraisal.id, id: entry.id }
@@ -125,31 +125,31 @@ RSpec.describe EntriesController, type: :controller do
           before do
             sign_in admin
           end
-      
+
           it 'allows access to the action' do
             get :edit, params: { appraisal_id: appraisal.id, id: entry.id }
             expect(response).to have_http_status(:success)
           end
         end
-      
+
         context 'when the user is the owner of the appraisal' do
           before do
             sign_in user
           end
-      
+
           it 'allows access to the action' do
             get :edit, params: { appraisal_id: appraisal.id, id: entry.id }
             expect(response).to have_http_status(:success)
           end
         end
-      
+
         context 'when the user is neither an admin nor the owner' do
           let(:other_user) { User.create!(email: 'other@example.com', password: 'password', first_name: 'Other', last_name: 'User') }
-      
+
           before do
             sign_in other_user
           end
-      
+
           it 'redirects to home_path with an alert' do
             get :edit, params: { appraisal_id: appraisal.id, id: entry.id }
             expect(response).to redirect_to(home_path)

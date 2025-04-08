@@ -13,28 +13,28 @@ RSpec.describe HomeController, type: :controller do
       Entry.create!(appraisal: appraisal, answers: { '1' => 'Answer 1', '2' => 'Answer 2' })
       appraisal
     end
-  
+
     before do
       sign_in user
     end
-  
+
     describe 'GET #index' do
       it 'assigns @appraisals for the current user' do
         appraisal_with_no_entries
         appraisal_with_blank_answers
         completed_appraisal
-  
+
         get :index
-        expect(assigns(:appraisals)).to match_array([appraisal_with_no_entries, appraisal_with_blank_answers, completed_appraisal])
+        expect(assigns(:appraisals)).to match_array([ appraisal_with_no_entries, appraisal_with_blank_answers, completed_appraisal ])
       end
-  
+
       it 'assigns @pending_appraisals with appraisals that have no entries or blank answers' do
         appraisal_with_no_entries
         appraisal_with_blank_answers
         completed_appraisal
-  
+
         get :index
-        expect(assigns(:pending_appraisals)).to match_array([appraisal_with_no_entries, appraisal_with_blank_answers])
+        expect(assigns(:pending_appraisals)).to match_array([ appraisal_with_no_entries, appraisal_with_blank_answers ])
       end
-    end 
+    end
 end
