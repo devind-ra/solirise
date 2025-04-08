@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
   resources :goals, except: [ :show ]
+  post "switch_to_admin", to: "admin_home#switch_to_admin", as: :switch_to_admin
+  post "switch_to_user", to: "admin_home#switch_to_user", as: :switch_to_user
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

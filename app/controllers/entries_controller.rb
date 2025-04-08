@@ -4,6 +4,8 @@ include EntriesHelper
 class EntriesController < ApplicationController
   before_action :set_appraisal, only: [ :new, :create, :edit, :update, :view, :download ]
   before_action :set_entry, only: [ :edit, :update, :view, :download ]
+  before_action :authenticate_user!
+  before_action :authorise_user!, only: [ :edit, :update, :view, :download ]
 
   # def index
   #     @entries = Entry.all
@@ -89,5 +91,11 @@ class EntriesController < ApplicationController
 
   def entry_params
     params.require(:entry).permit(answers: {})
+  end
+
+  def authorise_user!
+    unless current_user && (current_user.admin? || current_user == @appraisal.user)
+      redirect_to home_path, alert: "You are not authorised to access this page."
+    end
   end
 end
