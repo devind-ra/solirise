@@ -1,18 +1,18 @@
 <%= form_with(model: goal, local: true) do |form| %>
     <div class="form-group mb-3">
-      <%= form.label :title %>
-      <%= form.text_field :title, class: "form-control" %>
+      <%= form.label :title, aria: { label: "Title for Goal" } %>
+      <%= form.text_field :title, class: "form-control", aria: { label: "Enter title for goal" } %>
     </div>
   
     <div class="form-group mb-3">
-      <%= form.label :description %>
-      <%= form.text_area :description, rows: 3, class: "form-control" %>
+      <%= form.label :description, aria: { label: "Description for Goal" } %>
+      <%= form.text_area :description, rows: 3, class: "form-control", aria: { label: "Enter description for goal" } %>
     </div>
   
     <div class="form-group mb-3">
-      <%= form.label :progress %>
-      <%= form.number_field :progress, in: 0..100, class: "form-control" %>
+      <%= form.label :progress, aria: { label: "Progress bar for goal" } %>
+      <%= form.number_field :progress, in: 0..100, class: "form-control", aria: { label: "Enter progress as a number for goal" } %>
     </div>
   
-    <%= form.submit class: "btn btn-success" %>
+    <%= form.submit class: "btn btn-success", aria: { label: "Submit goal" } %>
 <% end %>

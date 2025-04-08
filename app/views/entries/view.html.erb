@@ -1,14 +1,14 @@
 <div class='container'>
   <div>
     <% if request.referer&.include?(admin_home_index_path) %>
-        <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-primary" %>
+        <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-primary", aria: { label: "Go back to Admin Home Page" } %>
     <% else %>
-        <%= link_to "Back to Home", home_path, class: "btn btn-secondary" %>
+        <%= link_to "Back to Home", home_path, class: "btn btn-secondary", aria: { label: "Go back to Home Page" } %>
     <% end %>
   </div>
   <br>
   <div>
-    <%= link_to "Download as PDF", download_appraisal_entry_path(@appraisal, @entry, format: :pdf), class: "btn btn-primary", target: "_blank" %>
+    <%= link_to "Download as PDF", download_appraisal_entry_path(@appraisal, @entry, format: :pdf), class: "btn btn-primary", target: "_blank", rel: "noopener noreferrer", aria: { label: "Download this appraisal entry as a PDF document. This will open in a new tab." } %>
   </div>
   <h1 class='mt-5'>Appraisal Entry</h1>
   <% if @appraisal %>
@@ -31,7 +31,7 @@
             <p><strong>Yes/No/Partial</strong></p>
           <% end %>
 
-          <textarea class="form-control" id="answers_<%= category.id %>" rows="4" disabled><%= @entry.answers&.[](category.id.to_s) || "No answer provided" %></textarea>
+          <textarea class="form-control" id="answers_<%= category.id %>" rows="4" disabled aria-label="Answer for category <%= category.name %>"><%= @entry.answers&.[](category.id.to_s) || "No answer provided"%></textarea>
         </div>
       <% end %>
     <% end %>
@@ -42,9 +42,9 @@
   <br>
   <div>
     <% if request.referer&.include?(admin_home_index_path) %>
-      <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-primary" %>
+      <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-primary", aria: { label: "Go back to Admin Home Page" } %>
     <% else %>
-      <%= link_to "Back to Home", home_path, class: "btn btn-secondary" %>
+      <%= link_to "Back to Home", home_path, class: "btn btn-secondary", aria: { label: "Go back to the Home Page" } %>
     <% end %>
   </div>
   <br><br>

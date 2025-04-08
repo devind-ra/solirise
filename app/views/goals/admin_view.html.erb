@@ -1,17 +1,17 @@
 <div class="container">
   <div>
-    <%= link_to "Back to Home", admin_home_index_path, class: "btn btn-secondary" %>
+    <%= link_to "Back to Home", admin_home_index_path, class: "btn btn-secondary", aria: { label: "Go back to Home Page" } %>
   </div>
   <br>
-  <h2>All User Goals</h2>
+  <h1>All User Goals</h1>
   <br>
 
   <%= form_with url: admin_view_goals_path, method: :get, local: true do %>
     <div class="form-group">
-      <%= label_tag :user_id, "Filter by User" %>
-      <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :full_name, params[:user_id]), include_blank: "All Users", class: "form-control" %>
+      <%= label_tag :user_id, "Filter by User", aria: { label: "Filter goals by user" } %>
+      <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :full_name, params[:user_id]), include_blank: "All Users", class: "form-control", aria: { label: "Dropdown to select a user" } %>
     </div>
-    <%= submit_tag "Filter", class: "btn btn-primary mt-2" %>
+    <%= submit_tag "Filter", class: "btn btn-primary mt-2", aria: { label: "Apply filter for user goals"} %>
   <% end %>
   <br>
 

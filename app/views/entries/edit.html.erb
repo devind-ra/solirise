@@ -24,18 +24,18 @@
             <p><strong>Yes/No/Partial</strong></p>
           <% end %>
 
-          <%= form.text_area nil, name: "entry[answers][#{category.id}]", class: "form-control", id: "answers_#{category.id}", rows: 4, placeholder: "Add your answer here", value: @entry.answers[category.id.to_s] || "" %>
+          <%= form.text_area nil, name: "entry[answers][#{category.id}]", class: "form-control", id: "answers_#{category.id}", rows: 4, placeholder: "Add your answer here", value: @entry.answers[category.id.to_s] || "", aria: { label: "Answer input for #{category.name}" } %>
         </div>
       <% end %>
     <% end %>
     <div>
-      <%= form.submit "Update", class: "btn btn-primary" %>
+      <%= form.submit "Update", class: "btn btn-primary", aria: { label: "Submit the form to update appraisal entry" } %>
     </div>
   <% end %>
 
   <br>
   <div>
-    <%= link_to "Back to Home", home_path, class: "btn btn-primary" %>
+    <%= link_to "Back to Home", home_path, class: "btn btn-primary", aria: { label: "Go back to the home page" } %>
   </div>
   <br><br>
 </div>

@@ -20,18 +20,18 @@
           <% when 1 %>
             <p><strong>Yes/No/Partial</strong></p>
           <% end %>
-          <%= form.text_area nil, name: "entry[answers][#{category.id}]", class: "form-control", id: "answers_#{category.id}", rows: 4, placeholder: "Add your evidence here" %>
+          <%= form.text_area nil, name: "entry[answers][#{category.id}]", class: "form-control", id: "answers_#{category.id}", rows: 4, placeholder: "Add your evidence here", aria: { label: "Answer input for #{category.name}" } %>
         </div>
       <% end %>
     <% end %>
     <div>
-      <%= form.submit "Submit", class: "btn btn-primary" %>
+      <%= form.submit "Submit", class: "btn btn-primary", aria: { label: "Submit the form to create a new appraisal entry" } %>
     </div>
   <% end %>
 
   <br>
   <div>
-    <%= link_to "Back to home", home_path, class: "btn btn-secondary" %>
+    <%= link_to "Back to home", home_path, class: "btn btn-secondary", aria: { label: "Go back to the home page" } %>
   </div>
   <br><br>
 </div>

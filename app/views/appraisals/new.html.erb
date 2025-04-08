@@ -3,21 +3,21 @@
 
     <%= form_with model: @appraisal, url: appraisals_path do |f| %>
     <div class="mb-3">
-        <%= label_tag :user_id, "Select User From Dropdown" %>
+        <%= label_tag :user_id, "Select User From Dropdown", aria: { label: "Dropdown to select a user for the appraisal creation" } %>
         <%= select_tag :user_id, options_from_collection_for_select(
             User.order(:first_name, :last_name), 
             :id, 
             ->(user) { "#{user.first_name} #{user.last_name} (#{user.email})" }
-        ), include_blank: true, class: "form-select" %>
+        ), include_blank: true, class: "form-select", aria: { label: "Select a user for the appraisal" } %>
     </div>
 
     <div class="mb-3">
-        <%= f.label :title %>
-        <%= f.text_field :title, class: "form-control", required: true %>
+        <%= f.label :title, aria: { label: "Enter the title of the appraisal" } %>
+        <%= f.text_field :title, class: "form-control", required: true, aria: { label: "Appraisal title input field" } %>
     </div>
 
-    <%= f.submit "Create Appraisal", class: "btn btn-success" %>
+    <%= f.submit "Create Appraisal", class: "btn btn-success", aria: { label: "Submit the form to create a new appraisal" } %>
     <% end %>
     <br>
-    <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-secondary" %>
+    <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-secondary", aria: { label: "Go back to the Admin Home page" } %>
 </div>
