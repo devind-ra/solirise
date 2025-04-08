@@ -1,5 +1,7 @@
 class GoalsController < ApplicationController
     before_action :set_goal, only: [ :edit, :update, :destroy ]
+    before_action :authenticate_user!
+    before_action :check_admin, only: [ :edit, :update, :destroy ]
 
     def index
         @goals = Goal.all
@@ -14,6 +16,7 @@ class GoalsController < ApplicationController
         if @goal.save
             redirect_to goals_path, notice: "Goal was successfully created."
         else
+            flash[:alert] = "Failed to create goal."
             render :new
         end
     end
@@ -23,9 +26,10 @@ class GoalsController < ApplicationController
 
     def update
         if @goal.update(goal_params)
-        redirect_to goals_path, notice: "Goal updated!"
+            redirect_to goals_path, notice: "Goal updated!"
         else
-        render :edit
+            flash[:alert] = "Failed to update goal."
+            render :edit
         end
     end
 
@@ -38,6 +42,12 @@ class GoalsController < ApplicationController
 
     def set_goal
         @goal = Goal.find(params[:id])
+    end
+
+    def check_admin
+        unless current_user.admin? || @goal.user == current_user
+          redirect_to goals_path, alert: "You are not authorised to perform this action."
+        end
     end
 
     def goal_params
