@@ -1,5 +1,6 @@
 class AppraisalsController < ApplicationController
     before_action :authenticate_user!
+    before_action :check_admin, except: [ :view ]
     before_action :set_appraisal, only: [ :destroy ]
 
     def new
@@ -12,7 +13,8 @@ class AppraisalsController < ApplicationController
         if @appraisal.save
             redirect_to admin_home_index_path, notice: "Appraisal created for #{@appraisal.user.first_name} #{@appraisal.user.last_name}."
         else
-            render :new, alert: "Failed to create appraisal."
+            flash[:alert] = "Failed to create appraisal."
+            render :new
         end
     end
 
