@@ -3,39 +3,33 @@
     <br>
     <%= link_to "Create Appraisal", new_appraisal_path, class: "btn btn-primary" %>
     <br><br>
-    <% if @appraisals.any? %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Appraisal Title</th>
-          <th>User</th>
-          <th>Updated At</th>
-          <th>Delete Action</th>
-          <th>View Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @appraisals.each do |appraisal| %>
-          <tr>
-            <td><%= appraisal.title %></td>
-            <td><%= "#{appraisal.user.first_name} #{appraisal.user.last_name}" %></td>
-            <% last_entry = appraisal.entries.last %>
-            <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
-            <td>
-              <%= button_to 'Delete', appraisal_path(appraisal), method: :delete, class: 'btn btn-danger' %>
-            </td>
-            <td>
-              <% if last_entry %>
-                <%= link_to 'View Entry', view_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-secondary' %>
-              <% else %>
-                <p>No entry available for this appraisal.</p>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p>No appraisals found.</p>
-  <% end %>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">User Appraisals</h5>
+            <p class="card-text">View and manage all your appraisals here.</p>
+            <%= link_to 'Go to User Appraisals', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Goals</h5>
+            <p class="card-text">User Goals</p>
+            <%= link_to 'Go to User Goals', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Create Appraisal</h5>
+            <p class="card-text">Create appraisal forms for users to fill out</p>
+            <%= link_to 'Create Appraisal', new_appraisal_path, class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

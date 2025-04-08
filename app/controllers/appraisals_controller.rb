@@ -2,6 +2,7 @@ class AppraisalsController < ApplicationController
     before_action :authenticate_user!
     before_action :check_admin, except: [ :view ]
     before_action :set_appraisal, only: [ :destroy ]
+    before_action :check_admin, only: [:admin_view]
 
     def new
         @appraisal = Appraisal.new
@@ -16,6 +17,10 @@ class AppraisalsController < ApplicationController
             flash[:alert] = "Failed to create appraisal."
             render :new
         end
+    end
+
+    def admin_view
+        @appraisals = Appraisal.includes(:user, :entries).all.order(updated_at: :desc)
     end
 
     def view

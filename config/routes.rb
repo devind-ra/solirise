@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     passwords: "users/passwords"
   }
   get "appraisals/view", to: "appraisals#view", as: :view_all_appraisals
+  get "appraisals/admin_view", to: "appraisals#admin_view", as: :admin_view_appraisals
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :appraisals, only: [ :index, :new, :create, :destroy ] do
     resources :entries, only: [ :new, :create, :destroy, :update, :edit ] do
