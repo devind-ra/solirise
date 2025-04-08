@@ -1,10 +1,19 @@
 class GoalsController < ApplicationController
     before_action :set_goal, only: [ :edit, :update, :destroy ]
     before_action :authenticate_user!
-    before_action :check_admin, only: [ :edit, :update, :destroy ]
+    before_action :check_admin, only: [ :admin_view ]
+    before_action :check_admin, except: [ :index, :new, :create, :edit, :update, :destroy ]
 
     def index
-        @goals = Goal.all
+        @goals = Goal.all.order(updated_at: :desc)
+    end
+
+    def admin_view
+        if params[:user_id].present?
+            @goals = Goal.includes(:user).where(user_id: params[:user_id]).order(updated_at: :desc)
+        else
+            @goals = Goal.includes(:user).all.order(updated_at: :desc)
+        end
     end
 
     def new
@@ -41,12 +50,13 @@ class GoalsController < ApplicationController
     private
 
     def set_goal
-        @goal = Goal.find(params[:id])
+        @goal = Goal.find_by(id: params[:id])
+        redirect_to home_path, alert: "Goal not found." unless @goal
     end
 
     def check_admin
-        unless current_user.admin? || @goal.user == current_user
-          redirect_to goals_path, alert: "You are not authorised to perform this action."
+        if action_name == "admin_view"
+            redirect_to home_path, alert: "You are not authorised to perform this action." unless current_user.admin? && session[:admin_mode]
         end
     end
 

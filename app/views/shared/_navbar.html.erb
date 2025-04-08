@@ -2,8 +2,13 @@
   <div class="container-fluid">
     <div class="d-flex align-items-center">
       <a class="navbar-brand me-3" href="<%= soli_brand_link_path %>">SoliRise</a>
-      <%= link_to "All Appraisals", view_all_appraisals_path, class: "btn btn-info btn-me me-2" %>
-      <%= link_to "My Goals", goals_path, class: "mr-2 btn btn-info btn-me" %>
+      <% if session[:admin_mode] %>
+        <%= link_to "All User Appraisals", admin_view_appraisals_path, class: "btn btn-info btn-me me-2" %>
+        <%= link_to "All User Goals", admin_view_goals_path, class: "btn btn-info btn-me me-2" %>
+      <% else %>
+        <%= link_to "All Appraisals", view_all_appraisals_path, class: "btn btn-info btn-me me-2" %>
+        <%= link_to "My Goals", goals_path, class: "mr-2 btn btn-info btn-me" %>
+      <% end %>
     </div>
   </div>
   <div class="d-flex me-3">

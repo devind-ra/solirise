@@ -1,0 +1,45 @@
+<div class="container">
+  <div>
+    <%= link_to "Back to Home", admin_home_index_path, class: "btn btn-secondary" %>
+  </div>
+  <br>
+  <h2>All User Goals</h2>
+  <br>
+
+  <%= form_with url: admin_view_goals_path, method: :get, local: true do %>
+    <div class="form-group">
+      <%= label_tag :user_id, "Filter by User" %>
+      <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :full_name, params[:user_id]), include_blank: "All Users", class: "form-control" %>
+    </div>
+    <%= submit_tag "Filter", class: "btn btn-primary mt-2" %>
+  <% end %>
+  <br>
+
+  <% if @goals.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Goal Title</th>
+          <th>User</th>
+          <th>Progress</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @goals.each do |goal| %>
+          <tr>
+            <td><%= goal.title %></td>
+            <td><%= goal.description %></td>
+            <td><%= "#{goal.user.first_name} #{goal.user.last_name}" %></td>
+            <td><%= "#{goal.progress}%" %></td>
+            <td><%= goal.created_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+            <td><%= goal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No goals found.</p>
+  <% end %>
+</div>
