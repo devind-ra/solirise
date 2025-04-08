@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  enum role: { user: "user", admin: "admin" }
+  enum :role, { user: "user", admin: "admin" }
 
   validates :first_name, presence: true, length: { maximum: 50 }, format: { with: /\A[a-zA-Z\s'-]+\z/, message: "only allows letters, spaces, hyphens, and apostrophes" }
   validates :last_name, presence: true, length: { maximum: 50 }, format: { with: /\A[a-zA-Z\s'-]+\z/, message: "only allows letters, spaces, hyphens, and apostrophes" }

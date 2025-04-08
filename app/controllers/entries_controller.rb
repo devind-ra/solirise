@@ -37,10 +37,6 @@ class EntriesController < ApplicationController
     if params[:appraisal_id]
       @appraisal = Appraisal.find(params[:appraisal_id])
       @entry = @appraisal.entries.last
-    else
-      @entry = Entry.find(params[:id])
-      @appraisal = @entry.appraisal
-      @categories = Category.includes(:questions)
     end
   end
 
