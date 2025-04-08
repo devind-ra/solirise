@@ -7,13 +7,17 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     passwords: "users/passwords"
   }
-  get "admin_home", to: "admin_home#index", as: :admin_home
+  get "appraisals/view", to: "appraisals#view", as: :view_all_appraisals
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resources :appraisals, only: [ :index, :destroy ] do
+  resources :appraisals, only: [ :index, :new, :create, :destroy ] do
     resources :entries, only: [ :new, :create, :destroy, :update, :edit ] do
       get "view", on: :member
+      get "download", on: :member
     end
   end
+  resources :goals, except: [ :show ]
+  post "switch_to_admin", to: "admin_home#switch_to_admin", as: :switch_to_admin
+  post "switch_to_user", to: "admin_home#switch_to_user", as: :switch_to_user
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

@@ -1,6 +1,11 @@
+require "prawn"
+include EntriesHelper
+
 class EntriesController < ApplicationController
-  before_action :set_appraisal, only: [ :new, :create, :edit, :update, :view ]
-  before_action :set_entry, only: [ :edit, :update ]
+  before_action :set_appraisal, only: [ :new, :create, :edit, :update, :view, :download ]
+  before_action :set_entry, only: [ :edit, :update, :view, :download ]
+  before_action :authenticate_user!
+  before_action :authorise_user!, only: [ :edit, :update, :view, :download ]
 
   # def index
   #     @entries = Entry.all
@@ -14,10 +19,16 @@ class EntriesController < ApplicationController
   def create
     @entry = @appraisal.entries.build(entry_params)
 
-    if @entry.save
-      redirect_to home_path, notice: "Entry submitted successfully!"
+    if @entry.answers.values.any?(&:blank?)
+      @entry.save(validate: false)
+
+      redirect_to home_path, notice: "Entry saved as draft. You can continue filling out the answers."
     else
-      render :new
+      if @entry.save
+        redirect_to home_path, notice: "Entry submitted successfully!"
+      else
+        render :new
+      end
     end
   end
 
@@ -39,7 +50,11 @@ class EntriesController < ApplicationController
 
   def update
     if @entry.update(entry_params)
-      redirect_to home_path, notice: "Entry updated successfully!"
+      if @entry.answers.values.any?(&:blank?)
+        redirect_to home_path, notice: "Entry saved as draft. You can continue later."
+      else
+        redirect_to home_path, notice: "Entry submitted successfully!"
+      end
     else
       render :edit
     end
@@ -48,6 +63,20 @@ class EntriesController < ApplicationController
   def destroy
       Entry.find(params[:id]).destroy
       redirect_to home_path
+  end
+
+  def download
+    @entry = Entry.find(params[:id])
+    @appraisal = @entry.appraisal
+    @categories = Category.includes(:questions)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = generate_pdf(@entry, @appraisal, @categories)
+        send_data pdf.render, filename: "Appraisal_Entry_#{@entry.id}.pdf", type: "application/pdf", disposition: "attachment"
+      end
+    end
   end
 
   private
@@ -62,5 +91,11 @@ class EntriesController < ApplicationController
 
   def entry_params
     params.require(:entry).permit(answers: {})
+  end
+
+  def authorise_user!
+    unless current_user && (current_user.admin? || current_user == @appraisal.user)
+      redirect_to home_path, alert: "You are not authorised to access this page."
+    end
   end
 end

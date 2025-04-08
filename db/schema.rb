@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_04_090359) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_07_150601) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_04_090359) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
     t.index ["user_id"], name: "index_appraisals_on_user_id"
   end
 
@@ -35,6 +36,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_04_090359) do
     t.bigint "appraisal_id", null: false
     t.json "answers"
     t.index ["appraisal_id"], name: "index_entries_on_appraisal_id"
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "progress"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -62,5 +73,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_04_090359) do
 
   add_foreign_key "appraisals", "users"
   add_foreign_key "entries", "appraisals"
+  add_foreign_key "goals", "users"
   add_foreign_key "questions", "categories"
 end

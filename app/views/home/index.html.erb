@@ -1,42 +1,58 @@
 <div class="container">
   <h1>Home</h1>
   <br>
-  <h2>All Appraisals</h2>
+  <h2>Pending Appraisals</h2>
   <br>
-  
-  <% if @appraisals.any? %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Created At</th>
-          <th>Edit Action</th>
-          <th>View Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @appraisals.each do |appraisal| %>
-          <tr>
-            <% last_entry = appraisal.entries.last %>
-            <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
-            <td>
-              <% if last_entry %>
-                <%= link_to 'Edit Last Entry', edit_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-primary' %>
-              <% else %>
-                <p>No entries available for this appraisal.</p>
-              <% end %>
-            </td>
-            <td>
-              <% if last_entry %>
-                <%= link_to 'View Last Entry', view_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-secondary' %>
-              <% else %>
-                <p>No entries available for this appraisal.</p>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <% if @pending_appraisals.any? %>
+    <ul class="list-group mb-4">
+      <% @pending_appraisals.each do |appraisal| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong><%= appraisal.title %></strong><br>
+          </div>
+          <% last_entry = appraisal.entries.last %>
+          <% if last_entry && last_entry.answers.values.any?(&:blank?) %>
+            <%= link_to "Continue Entry", edit_appraisal_entry_path(appraisal, last_entry), class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to "Start Entry", new_appraisal_entry_path(appraisal), class: "btn btn-success" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   <% else %>
-    <p>No appraisals found.</p>
+    <p>No pending appraisals 🎉</p>
+    <br>
   <% end %>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">All Appraisals</h5>
+          <p class="card-text">View and manage all your appraisals here.</p>
+          <%= link_to 'Go to Appraisals', view_all_appraisals_path, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Goals</h5>
+          <p class="card-text">Manage your goals and track your progress.</p>
+          <%= link_to 'Go to Goals', goals_path, class: 'btn btn-success' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Edit Profile</h5>
+          <p class="card-text">Update your profile details here.</p>
+          <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-info' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
