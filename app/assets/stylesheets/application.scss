@@ -30,3 +30,42 @@
       display: none;
     }
   }
+
+body, p, h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto Flex", sans-serif;
+}
+
+.small-image {
+  width: 100px;
+  height: auto;
+}
+
+.navbar-logo{
+  height: 60px;
+  width: auto;
+}
+
+.btn-primary {
+  background-color: #171695;
+  border-color: #171695;
+}
+
+.btn-secondary {
+  background-color: #595959;
+  border-color: #595959;
+}
+
+.btn-danger {
+  background-color: #AA1D2B;
+  border-color: #AA1D2B;
+}
+
+.btn-success {
+  background-color: #12633D;
+  border-color: #12633D;
+}
+
+.custom-navbar {
+  // background-color: #235789;
+  // background-color: #247BA0;
+}

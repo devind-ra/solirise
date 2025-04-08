@@ -1,7 +1,9 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <div class="d-flex align-items-center">
-      <a class="navbar-brand me-3" href="<%= soli_brand_link_path %>">SoliRise</a>
+      <a class="navbar-brand me-3" href="<%= soli_brand_link_path %>">
+        <%= image_tag "logo.png", alt: "SoliRise Logo", class: "navbar-logo" %>
+      </a>
       <% if session[:admin_mode] %>
         <%= link_to "All User Appraisals", admin_view_appraisals_path, class: "btn btn-info btn-me me-2", aria: { label: "Go to All Appraisals Admin Page" } %>
         <%= link_to "All User Goals", admin_view_goals_path, class: "btn btn-info btn-me me-2", aria: { label: "Go to All Goals Admin Page" } %>
