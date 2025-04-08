@@ -18,6 +18,44 @@ RSpec.describe GoalsController, type: :controller do
       end
     end
 
+    describe 'GET #admin_view' do
+      context 'when the user is an admin' do
+        let(:admin) { User.create!(email: 'admin@example.com', password: 'password', first_name: 'Admin', last_name: 'User', role: 'admin') }
+
+        before do
+          sign_in admin
+          session[:admin_mode] = true
+        end
+
+        it 'assigns all goals to @goals when no user_id is provided' do
+          goal1 = Goal.create!(title: 'Goal 1', description: 'Description 1', progress: 10, user: user)
+          goal2 = Goal.create!(title: 'Goal 2', description: 'Description 2', progress: 20, user: user)
+
+          get :admin_view
+          expect(assigns(:goals)).to match_array([ goal1, goal2 ])
+          expect(response).to render_template(:admin_view)
+        end
+
+        it 'assigns goals for a specific user when user_id is provided' do
+          other_user = User.create!(email: 'other@example.com', password: 'password', first_name: 'Other', last_name: 'User')
+          goal1 = Goal.create!(title: 'Goal 1', description: 'Description 1', progress: 10, user: user)
+          goal2 = Goal.create!(title: 'Goal 2', description: 'Description 2', progress: 20, user: other_user)
+
+          get :admin_view, params: { user_id: user.id }
+          expect(assigns(:goals)).to match_array([ goal1 ])
+          expect(response).to render_template(:admin_view)
+        end
+      end
+
+      context 'when the user is not an admin' do
+        it 'redirects to the goals index with an alert' do
+          get :admin_view
+          expect(response).to redirect_to(home_path)
+          expect(flash[:alert]).to eq('You are not authorised to perform this action.')
+        end
+      end
+    end
+
     describe 'GET #new' do
       it 'assigns a new goal to @goal' do
         get :new
@@ -47,20 +85,12 @@ RSpec.describe GoalsController, type: :controller do
     end
 
     describe 'GET #edit' do
-        context 'when the user is not the owner or an admin' do
-            let(:other_user) { User.create!(email: 'other@example.com', password: 'password', first_name: 'Other', last_name: 'User') }
-            let(:other_goal) { Goal.create!(title: 'Other Goal', description: 'Other Description', progress: 20, user: other_user) }
-
-            before do
-                sign_in user
-            end
-
-            it 'redirects to the goals index with an alert' do
-                get :edit, params: { id: other_goal.id }
-                expect(response).to redirect_to(goals_path)
-                expect(flash[:alert]).to eq('You are not authorised to perform this action.')
-            end
+      context 'when the user is the owner of the goal' do
+        it 'allows access to the edit page' do
+          get :edit, params: { id: goal.id }
+          expect(response).to render_template(:edit)
         end
+      end
     end
 
     describe 'PATCH #update' do
@@ -84,15 +114,17 @@ RSpec.describe GoalsController, type: :controller do
     end
 
     describe 'DELETE #destroy' do
-      it 'deletes the goal and redirects to the goals index' do
-        goal_to_delete = Goal.create!(title: 'Goal to Delete', description: 'Description', progress: 10, user: user)
+      context 'when the user is the owner of the goal' do
+        it 'deletes the goal and redirects to the goals index' do
+          goal_to_delete = Goal.create!(title: 'Goal to Delete', description: 'Description', progress: 10, user: user)
 
-        expect {
-          delete :destroy, params: { id: goal_to_delete.id }
-        }.to change(Goal, :count).by(-1)
+          expect {
+            delete :destroy, params: { id: goal_to_delete.id }
+          }.to change(Goal, :count).by(-1)
 
-        expect(response).to redirect_to(goals_path)
-        expect(flash[:notice]).to eq('Goal was successfully removed.')
+          expect(response).to redirect_to(goals_path)
+          expect(flash[:notice]).to eq('Goal was successfully removed.')
+        end
       end
-    end
+  end
 end

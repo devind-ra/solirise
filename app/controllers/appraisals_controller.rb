@@ -1,8 +1,8 @@
 class AppraisalsController < ApplicationController
     before_action :authenticate_user!
+    before_action :check_admin, only: [ :new, :create, :admin_view, :destroy ]
     before_action :check_admin, except: [ :view ]
     before_action :set_appraisal, only: [ :destroy ]
-    before_action :check_admin, only: [:admin_view]
 
     def new
         @appraisal = Appraisal.new
@@ -20,7 +20,11 @@ class AppraisalsController < ApplicationController
     end
 
     def admin_view
-        @appraisals = Appraisal.includes(:user, :entries).all.order(updated_at: :desc)
+        if params[:user_id].present?
+            @appraisals = Appraisal.includes(:user, :entries).where(user_id: params[:user_id]).order(updated_at: :desc)
+        else
+            @appraisals = Appraisal.includes(:user, :entries).all.order(updated_at: :desc)
+        end
     end
 
     def view
@@ -42,7 +46,11 @@ class AppraisalsController < ApplicationController
     end
 
     def check_admin
-        redirect_to home_path, alert: "You are not authorised to perform this action" unless current_user.admin?
+        if action_name == "admin_view"
+            redirect_to home_path, alert: "You are not authorised to perform this action." unless current_user.admin? && session[:admin_mode]
+        else
+            redirect_to home_path, alert: "You are not authorised to perform this action." unless current_user.admin? || (@appraisal && @appraisal.user == current_user)
+        end
     end
 
     def appraisal_params
