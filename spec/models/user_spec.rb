@@ -36,15 +36,44 @@ RSpec.describe User, type: :model do
         end
     end
 
-    # describe 'admin-role' do
-    #     it 'returns true if the user is an admin' do
-    #         user.role = 'admin'
-    #         expect(user.admin?).to be true
-    #     end
-
-    #     it 'returns false if the user is not an admin' do
-    #         user.role = 'user'
-    #         expect(user.admin?).to be false
-    #     end
-    # end
+    describe 'instance methods' do
+        describe 'full_name' do
+          it 'returns the full name of the user' do
+            expect(user.full_name).to eq('John Doe')
+          end
+    
+          it 'handles missing first name' do
+            user.first_name = nil
+            expect(user.full_name).to eq('Doe')
+          end
+    
+          it 'handles missing last name' do
+            user.last_name = nil
+            expect(user.full_name).to eq('John')
+          end
+    
+          it 'returns an empty string if both first and last names are missing' do
+            user.first_name = nil
+            user.last_name = nil
+            expect(user.full_name).to eq('')
+          end
+        end
+    
+        describe '#admin?' do
+          it 'returns true if the user is an admin' do
+            user.role = 'admin'
+            expect(user.admin?).to be true
+          end
+    
+          it 'returns false if the user is not an admin' do
+            expect(user.admin?).to be false
+          end
+        end
+    
+        describe '#standard_user?' do
+          it 'always returns true for a standard user' do
+            expect(user.standard_user?).to be true
+          end
+        end
+      end
 end

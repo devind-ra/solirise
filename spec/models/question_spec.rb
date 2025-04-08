@@ -28,5 +28,19 @@ RSpec.describe Question, type: :model do
       expect(question).not_to be_valid
       expect(question.errors[:category]).to include('must exist')
     end
+
+    it 'is invalid with blank content' do
+      category = Category.create!(name: 'Sample Category')
+      question = Question.new(content: '', category: category)
+      expect(question).not_to be_valid
+      expect(question.errors[:content]).to include("can't be blank")
+    end
+
+    it 'is invalid with only whitespace content' do
+      category = Category.create!(name: 'Sample Category')
+      question = Question.new(content: '   ', category: category)
+      expect(question).not_to be_valid
+      expect(question.errors[:content]).to include("can't be blank")
+    end
   end
 end
