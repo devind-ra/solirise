@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-    <%= link_to "Back to Home", admin_home_index_path, class: "btn btn-secondary", aria: { label: "Go back to Home Page" } %>
+    <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-secondary", aria: { label: "Go back to Admin Home Page" } %>
   </div>
   <br>
   <h1>All User Goals</h1>
@@ -20,9 +20,9 @@
       <thead>
         <tr>
           <th>Goal Title</th>
+          <th>Goal Description</th>
           <th>User</th>
           <th>Progress</th>
-          <th>Created At</th>
           <th>Updated At</th>
         </tr>
       </thead>
@@ -33,7 +33,6 @@
             <td><%= goal.description %></td>
             <td><%= "#{goal.user.first_name} #{goal.user.last_name}" %></td>
             <td><%= "#{goal.progress}%" %></td>
-            <td><%= goal.created_at.strftime("%B %d, %Y at %I:%M %p") %></td>
             <td><%= goal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
           </tr>
         <% end %>
