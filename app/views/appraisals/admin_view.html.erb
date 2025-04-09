@@ -1,20 +1,20 @@
 <div class="container">
     <div>
-        <%= link_to "Back to Home", admin_home_index_path, class: "btn btn-secondary" %>
+        <%= link_to "Back to Admin Home", admin_home_index_path, class: "btn btn-secondary", aria: { label: "Go Back to Admin Home Page" } %>
     </div>
     <br>
-    <h2>All User Appraisals</h2>
+    <h1>All User Appraisals</h1>
     <br>
 
     <%= form_with url: admin_view_appraisals_path, method: :get, local: true do %>
       <div class="form-group">
-        <%= label_tag :user_id, "Filter by User" %>
+        <%= label_tag :user_id, "Filter by User", aria: { label: 'Filter appraisals by user' } %>
         <%= select_tag :user_id, options_for_select(
           User.all.map { |u| ["#{u.full_name} (#{u.email})", u.id] },
           params[:user_id]
-        ), include_blank: "All Users", class: "form-control" %>
+        ), include_blank: "All Users", class: "form-control filter-field", aria: { label: 'Dropdown to select a user' }  %>
       </div>
-      <%= submit_tag "Filter", class: "btn btn-primary mt-2" %>
+      <%= submit_tag "Filter", class: "btn btn-primary mt-2", aria: { label: 'Apply filter to appraisals' }  %>
     <% end %>
     <br>
 
@@ -37,11 +37,11 @@
             <% last_entry = appraisal.entries.last %>
             <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
             <td>
-              <%= button_to 'Delete', appraisal_path(appraisal), method: :delete, class: 'btn btn-danger' %>
+              <%= button_to 'Delete', appraisal_path(appraisal), method: :delete, class: 'btn btn-danger', aria: { label: "Delete appraisal titled #{appraisal.title}" } %>
             </td>
             <td>
               <% if last_entry %>
-                <%= link_to 'View Entry', view_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-secondary' %>
+                <%= link_to 'View Entry', view_appraisal_entry_path(appraisal, last_entry), class: 'btn btn-secondary', aria: { label: "View the latest entry for appraisal titled #{appraisal.title}" } %>
               <% else %>
                 <p>No entry available for this appraisal.</p>
               <% end %>

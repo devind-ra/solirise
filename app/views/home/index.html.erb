@@ -1,5 +1,6 @@
 <div class="container">
-  <h1>Home</h1>
+  <h1>Welcome <%= current_user.full_name %></h1>
+  <hr>
   <br>
   <h2>Pending Appraisals</h2>
   <br>
@@ -12,9 +13,9 @@
           </div>
           <% last_entry = appraisal.entries.last %>
           <% if last_entry && last_entry.answers.values.any?(&:blank?) %>
-            <%= link_to "Continue Entry", edit_appraisal_entry_path(appraisal, last_entry), class: "btn btn-primary" %>
+            <%= link_to "Continue Entry", edit_appraisal_entry_path(appraisal, last_entry), class: "btn btn-primary", aria: { label: "Continue #{appraisal.title} Entry" } %>
           <% else %>
-            <%= link_to "Start Entry", new_appraisal_entry_path(appraisal), class: "btn btn-success" %>
+            <%= link_to "Start Entry", new_appraisal_entry_path(appraisal), class: "btn btn-success", aria: { label: "Start #{appraisal.title} Entry" } %>
           <% end %>
         </li>
       <% end %>
@@ -28,9 +29,11 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title">All Appraisals</h5>
+          <h3 class="card-title">Appraisals</h5>
+          <%= image_tag "appraisalform.png", class: "card-img-top small-image", alt: "Form" %>
+          <br><br>
           <p class="card-text">View and manage all your appraisals here.</p>
-          <%= link_to 'Go to Appraisals', view_all_appraisals_path, class: 'btn btn-primary' %>
+          <%= link_to 'Go to Appraisals', view_all_appraisals_path, class: 'btn btn-primary', aria: { label: "Go to My Appraisals page" } %>
         </div>
       </div>
     </div>
@@ -39,8 +42,10 @@
       <div class="card">
         <div class="card-body">
           <h3 class="card-title">Goals</h5>
+          <%= image_tag "targetimage.png", class: "card-img-top small-image", alt: "Target" %>
+          <br><br>
           <p class="card-text">Manage your goals and track your progress.</p>
-          <%= link_to 'Go to Goals', goals_path, class: 'btn btn-success' %>
+          <%= link_to 'Go to Goals', goals_path, class: 'btn btn-primary', aria: { label: "Go to My Goals Page" } %>
         </div>
       </div>
     </div>
@@ -49,8 +54,10 @@
       <div class="card">
         <div class="card-body">
           <h3 class="card-title">Edit Profile</h5>
+          <%= image_tag "editprofile.png", class: "card-img-top small-image", alt: "Pencil" %>
+          <br><br>
           <p class="card-text">Update your profile details here.</p>
-          <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-info' %>
+          <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary', aria: { label: "Go to Edit Profile Page" } %>
         </div>
       </div>
     </div>

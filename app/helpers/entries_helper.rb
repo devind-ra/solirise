@@ -24,7 +24,7 @@ module EntriesHelper
 
         if category.questions.any?
           category.questions.each do |question|
-            pdf.text "#{question.content}"
+            pdf.text "#{question.content}", size: 10
             pdf.move_down 5
           end
         end

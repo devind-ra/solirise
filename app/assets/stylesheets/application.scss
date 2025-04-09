@@ -30,3 +30,81 @@
       display: none;
     }
   }
+
+body, p, h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto Flex", sans-serif;
+}
+
+.small-image {
+  width: 6.25rem;
+  height: auto;
+}
+
+.navbar-logo{
+  height: 3.75rem;
+  width: auto;
+  border-radius: 5%;
+}
+
+.landing-logo{
+  height: 7.5rem;
+  width: auto;
+}
+
+.custom-landing{
+  height: 34.375rem;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.progress-field{
+  max-width: 9.375rem;
+  width: 100%;
+}
+
+.title-field{
+  max-width: 30.75rem;
+  width: 100%;
+}
+
+.filter-field{
+  max-width: 30.625rem;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: #171695;
+  border-color: #171695;
+}
+
+.btn-secondary {
+  background-color: #FAEFE0;
+  border-color: #FAEFE0;
+  color: black;
+}
+
+.custom-navbar {
+  background-color: #004AAC;
+  border-color: #004AAC;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #AA1D2B;
+  border-color: #AA1D2B;
+}
+
+.btn-success {
+  background-color: #12633D;
+  border-color: #12633D;
+}
+
+.btn-info {
+  background-color: #F3F9FB;
+  background-color: #F3F9FB;
+}
+
+.card-text{
+  font-size: 1rem;
+}
