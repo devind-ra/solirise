@@ -12,7 +12,7 @@
         <%= select_tag :user_id, options_for_select(
           User.all.map { |u| ["#{u.full_name} (#{u.email})", u.id] },
           params[:user_id]
-        ), include_blank: "All Users", class: "form-control", aria: { label: 'Dropdown to select a user' }  %>
+        ), include_blank: "All Users", class: "form-control filter-field", aria: { label: 'Dropdown to select a user' }  %>
       </div>
       <%= submit_tag "Filter", class: "btn btn-primary mt-2", aria: { label: 'Apply filter to appraisals' }  %>
     <% end %>

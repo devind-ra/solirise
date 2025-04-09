@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container-fluid">
     <div class="d-flex align-items-center">
       <a class="navbar-brand me-3" href="<%= soli_brand_link_path %>">
@@ -27,7 +27,7 @@
     <% end %>
     <div class="nav-link ms-2 mt-3">
       <%= link_to edit_user_registration_path, aria: { label: "Edit Profile" }  do %>
-        <i class="bi bi-gear-fill fs-2 mb-2"></i>
+        <i class="bi bi-gear-fill fs-2 mb-2" style="color: #F3F9FB"></i>
       <% end %>
     </div>
     <% if user_signed_in? %> 

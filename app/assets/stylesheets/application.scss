@@ -36,14 +36,43 @@ body, p, h1, h2, h3, h4, h5, h6 {
 }
 
 .small-image {
-  width: 100px;
+  width: 6.25rem;
   height: auto;
 }
 
 .navbar-logo{
-  height: 60px;
+  height: 3.75rem;
+  width: auto;
+  border-radius: 5%;
+}
+
+.landing-logo{
+  height: 7.5rem;
   width: auto;
 }
+
+.custom-landing{
+  height: 34.375rem;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.progress-field{
+  max-width: 9.375rem;
+  width: 100%;
+}
+
+.title-field{
+  max-width: 30.75rem;
+  width: 100%;
+}
+
+.filter-field{
+  max-width: 30.625rem;
+  width: 100%;
+}
+
 
 .btn-primary {
   background-color: #171695;
@@ -51,8 +80,15 @@ body, p, h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary {
-  background-color: #595959;
-  border-color: #595959;
+  background-color: #FAEFE0;
+  border-color: #FAEFE0;
+  color: black;
+}
+
+.custom-navbar {
+  background-color: #004AAC;
+  border-color: #004AAC;
+  color: white;
 }
 
 .btn-danger {
@@ -65,7 +101,7 @@ body, p, h1, h2, h3, h4, h5, h6 {
   border-color: #12633D;
 }
 
-.custom-navbar {
-  // background-color: #235789;
-  // background-color: #247BA0;
+.btn-info {
+  background-color: #F3F9FB;
+  background-color: #F3F9FB;
 }

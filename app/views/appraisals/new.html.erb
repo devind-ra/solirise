@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mx-auto" style="max-width: 600px;">
     <h1>New Appraisal</h1>
 
     <%= form_with model: @appraisal, url: appraisals_path do |f| %>
@@ -8,12 +8,12 @@
             User.order(:first_name, :last_name), 
             :id, 
             ->(user) { "#{user.first_name} #{user.last_name} (#{user.email})" }
-        ), include_blank: true, class: "form-select", aria: { label: "Select a user for the appraisal" } %>
+        ), include_blank: true, class: "form-select filter-field", aria: { label: "Select a user for the appraisal" } %>
     </div>
 
     <div class="mb-3">
         <%= f.label :title, aria: { label: "Enter the title of the appraisal" } %>
-        <%= f.text_field :title, class: "form-control", required: true, aria: { label: "Appraisal title input field" } %>
+        <%= f.text_field :title, class: "form-control filter-field", required: true, aria: { label: "Appraisal title input field" } %>
     </div>
 
     <%= f.submit "Create Appraisal", class: "btn btn-success", aria: { label: "Submit the form to create a new appraisal" } %>
