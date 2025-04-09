@@ -20,9 +20,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <%= render 'shared/navbar' unless @disable_nav %>
-    <div class="container mt-3">
+    <main class="flex-grow-1 container mt-3">
       <% if notice %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <%= notice %>
@@ -34,7 +34,9 @@
           <%= alert %>
         </div>
       <% end %>
-    </div>
-    <%= yield %>
+
+      <%= yield %>
+    </main>
+    <%= render 'shared/footer' unless @disable_nav %>
   </body>
 </html>
