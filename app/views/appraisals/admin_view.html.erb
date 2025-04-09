@@ -35,7 +35,7 @@
             <td><%= appraisal.title %></td>
             <td><%= "#{appraisal.user.first_name} #{appraisal.user.last_name}" %></td>
             <% last_entry = appraisal.entries.last %>
-            <td><%= appraisal.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+            <td><%= (appraisal.updated_at + 1.hour).strftime("%B %d, %Y at %I:%M %p") %></td>
             <td>
               <%= button_to 'Delete', appraisal_path(appraisal), method: :delete, class: 'btn btn-danger', aria: { label: "Delete appraisal titled #{appraisal.title}" } %>
             </td>

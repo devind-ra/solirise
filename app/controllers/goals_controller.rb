@@ -5,7 +5,7 @@ class GoalsController < ApplicationController
     before_action :check_admin, except: [ :index, :new, :create, :edit, :update, :destroy ]
 
     def index
-        @goals = Goal.all.order(updated_at: :desc)
+        @goals = current_user.goals.order(updated_at: :desc)
     end
 
     def admin_view
