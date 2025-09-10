@@ -1,5 +1,7 @@
 SoliRise
 
+Appraisal and Goal-setting application using Ruby on Rails (RoR)
+
 Prerequisites:
 - Bundler
 - Ruby - 3.1.2
