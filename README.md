@@ -1,24 +1,28 @@
-# README
+SoliRise
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Prerequisites:
+- Bundler
+- Ruby - 3.1.2
+- Rails
+- PostgreSQL
+- Git
 
-Things you may want to cover:
+To run the application first run:
 
-* Ruby version
+```bundle install```
 
-* System dependencies
+Then run to create and add migrations to the database: 
 
-* Configuration
+```rails db:create```
+  
+```rails db:migrate```
 
-* Database creation
+Seed data into the database by running this:
 
-* Database initialization
+```rails db:seed```
 
-* How to run the test suite
+To run the server use the following command:
 
-* Services (job queues, cache servers, search engines, etc.)
+```rails db:server```
 
-* Deployment instructions
 
-* ...
